@@ -1,19 +1,85 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-animated-bottom-tabs';
+import { StyleSheet, View, Text, Image } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import TabBar from 'react-native-animated-bottom-tabs';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const HomeScreen = () => {
+    return (
+      <View style={styles.container}>
+        <Text>Home</Text>
+      </View>
+    );
+  };
+  const SettingsScreen = () => {
+    return (
+      <View style={styles.container}>
+        <Text>Settings</Text>
+      </View>
+    );
+  };
+  const ProfileScreen = () => {
+    return (
+      <View style={styles.container}>
+        <Text>Profile</Text>
+      </View>
+    );
+  };
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const TabNavigator = createBottomTabNavigator();
+
+  const Tabs = () => {
+    return (
+      <TabNavigator.Navigator tabBar={(props) => <TabBar {...props} />}>
+        <TabNavigator.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image
+                source={require('../assets/home.png')}
+                style={styles.icon}
+              />
+            ),
+          }}
+        />
+        <TabNavigator.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image
+                source={require('../assets/home.png')}
+                style={styles.icon}
+              />
+            ),
+          }}
+        />
+        <TabNavigator.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Image
+                source={require('../assets/home.png')}
+                style={styles.icon}
+              />
+            ),
+          }}
+        />
+      </TabNavigator.Navigator>
+    );
+  };
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <NavigationContainer>
+      <Tabs />
+    </NavigationContainer>
   );
 }
 
@@ -23,9 +89,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  icon: { height: 20, width: 20, tintColor: 'white' },
 });
