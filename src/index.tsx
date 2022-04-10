@@ -13,6 +13,7 @@ interface tabBarProps {
   state: any;
   navigation: any;
   descriptors: any;
+  position?: 'Fixed' | 'Float';
   tabBarStyle?: ViewStyle;
   activeContainerStyle?: ViewStyle;
   labelStyle?: TextStyle;
@@ -23,6 +24,7 @@ const TabBar: React.FC<tabBarProps> = ({
   state,
   navigation,
   descriptors,
+  position,
   tabBarStyle,
   activeContainerStyle,
   reverseLabelSelection,
@@ -43,7 +45,9 @@ const TabBar: React.FC<tabBarProps> = ({
   };
 
   return (
-    <View style={[styles.parent, tabBarStyle]}>
+    <View
+      style={[position === 'Fixed' ? styles.fixed : styles.float, tabBarStyle]}
+    >
       <Animated.View
         style={[
           styles.animatedContainer,
@@ -76,7 +80,14 @@ const TabBar: React.FC<tabBarProps> = ({
             }}
             key={item.key}
           >
-            {options.tabBarIcon !== undefined && options.tabBarIcon()}
+            {!reverseLabelSelection &&
+              item.name !== selected &&
+              options.tabBarIcon !== undefined &&
+              options.tabBarIcon()}
+            {reverseLabelSelection &&
+              item.name === selected &&
+              options.tabBarIcon !== undefined &&
+              options.tabBarIcon()}
 
             {reverseLabelSelection && item.name !== selected && (
               <Text style={[styles.label, labelStyle]}>{item.name}</Text>
@@ -94,7 +105,7 @@ const TabBar: React.FC<tabBarProps> = ({
 export default TabBar;
 
 const styles = StyleSheet.create({
-  parent: {
+  float: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: 'black',
@@ -107,6 +118,14 @@ const styles = StyleSheet.create({
     bottom: 10,
     left: 0,
     right: 0,
+  },
+
+  fixed: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'black',
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
 
   animatedContainer: {

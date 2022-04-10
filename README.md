@@ -66,6 +66,16 @@ const styles = StyleSheet.create({
 });
 ```
 
+## Props
+
+| Prop                  | Type      | Default | Description                                                            |
+| --------------------- | --------- | ------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| position              | "Fixed"   | "Float" | "Float"                                                                | "Fixed" - Tab bar is fixed to bottom, "Float" - Tab bar is floating |
+| tabBarStyle           | ViewProps | -       | Style for Tab bar                                                      |
+| activeContainerStyle  | ViewProps | -       | Style for Active Cell                                                  |
+| reverseLabelSelection | Boolean   | false   | if true, the icon is shown on selected and text is shown on unselected |
+| labelStyle            | TextProps | -       | Style for Label                                                        |
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
