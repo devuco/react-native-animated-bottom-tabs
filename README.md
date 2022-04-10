@@ -13,48 +13,52 @@ yarn add react-native-animated-bottom-tabs
 ## Usage
 
 ```js
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBar from 'react-native-animated-bottom-tabs';
 
 // ...
 
-<TabNavigator.Navigator
-  tabBar={(props) => (
-    <TabBar
-      {...props} //<-Add Tabbar and pass props
-    />
-  )}
->
-  <TabNavigator.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{
-      headerShown: false,
-      tabBarIcon: () => (
-        <Image source={require('../assets/home.png')} style={styles.icon} />
-      ),
-    }}
-  />
-  <TabNavigator.Screen
-    name="Settings"
-    component={SettingsScreen}
-    options={{
-      headerShown: false,
-      tabBarIcon: () => (
-        <Image source={require('../assets/settings.png')} style={styles.icon} />
-      ),
-    }}
-  />
-  <TabNavigator.Screen
-    name="Profile"
-    component={ProfileScreen}
-    options={{
-      headerShown: false,
-      tabBarIcon: () => (
-        <Image source={require('../assets/profile.png')} style={styles.icon} />
-      ),
-    }}
-  />
-</TabNavigator.Navigator>;
+const TabNavigator = createBottomTabNavigator();
+
+const Tabs = () => {
+  return (
+    <TabNavigator.Navigator tabBar={(props) => <TabBar {...props} />}>
+      <TabNavigator.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image source={require('../assets/home.png')} style={styles.icon} />
+          ),
+        }}
+      />
+      <TabNavigator.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={require('../assets/settigs.png')}
+              style={styles.icon}
+            />
+          ),
+        }}
+      />
+      <TabNavigator.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: () => (
+            <Image
+              source={require('../assets/profile.png')}
+              style={styles.icon}
+            />
+          ),
+        }}
+      />
+    </TabNavigator.Navigator>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

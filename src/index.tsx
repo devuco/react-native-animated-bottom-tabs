@@ -27,8 +27,8 @@ const TabBar: React.FC<tabBarProps> = ({
   position,
   tabBarStyle,
   activeContainerStyle,
-  reverseLabelSelection,
   labelStyle,
+  reverseLabelSelection,
 }) => {
   const { routes } = state;
   const [selected, setSelected] = useState(routes[0].name);
